@@ -45,7 +45,6 @@ let place = {
       .then((data) => {
         this.getLocation(data);
       })
-      .catch((error) => console.error(error));
   },
   getLocation: function (data) {
     const { lat, lon, name:city } = data[0];
