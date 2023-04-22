@@ -12,7 +12,6 @@ let weather = {
     )
       .then((response) => response.json())
       .then((data) => this.getWeather(data))
-      .catch((error) => console.error(error));
   },
   getWeather: function (data) {
     const { description, icon } = data.weather[0];
