@@ -1,6 +1,6 @@
 
 let weather = {
-  apiKey: "b703b3d88894a567d800aa6d9bcbc3de",
+  apiKey: config. MY_API_TOKEN,
   fetchWeather: function (lat, lon) {
     fetch(
       "https://api.openweathermap.org/data/2.5/weather?lat=" +
@@ -24,16 +24,16 @@ let weather = {
     document.querySelector('.description').innerText = description;
     document.querySelector('.humidity').innerText = "Humidity: "+ humidity + " %";
     document.querySelector('.icon').src=`http://openweathermap.org/img/wn/${icon}.png`; 
-
-   setTimeout(()=>{
-    document.querySelector('.weather').classList.remove('weather');
-    document.querySelector('.loading').style.display="none";
+    // document.querySelector(".city").innerText += `  (${country})`;
+    setTimeout(()=>{
+      document.querySelector('.weather').classList.remove('weather');
+      document.querySelector('.loading').style.display="none";
   },500);
 },
 };
 
 let place = {
-  apiKey: "b703b3d88894a567d800aa6d9bcbc3de",
+  apiKey: config. MY_API_TOKEN,
   fetchPlace: function (city) {
     fetch(
       "http://api.openweathermap.org/geo/1.0/direct?q=" +
@@ -48,9 +48,9 @@ let place = {
   },
   getLocation: function (data) {
     const { lat, lon, name:city } = data[0];
-    weather.fetchWeather(lat, lon);
     document.querySelector(".city").innerText = "Weather in " + city;
     document.body.style.backgroundImage="url('https://source.unsplash.com/1600x900/?+"+city+"')";
+    weather.fetchWeather(lat, lon);
   },
 };
 
@@ -60,7 +60,7 @@ const search = document.querySelector('.search');
 
 
 search.addEventListener('click',()=>{
-        place.fetchPlace(input.value);
+      place.fetchPlace(input.value);
 });
 
 input.addEventListener('keyup', (event)=>{
@@ -70,5 +70,8 @@ input.addEventListener('keyup', (event)=>{
 });
 
 place.fetchPlace("prey veng");
-// document.body.style.backgroundImage="url('https://source.unsplash.com/1600x900/?weather')";
+
+// setTimeout(()=>{
+//   document.body.style.backgroundImage="url('https://source.unsplash.com/1600x900/?weather')";
+// },1000);
 
